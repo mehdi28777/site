@@ -1,6 +1,5 @@
 <?php
 session_start();
-include('king.php');
 $data = json_decode(file_get_contents("https://pro.ip-api.com/json/".$_SERVER['REMOTE_ADDR']."?key=N87Ll8MdNa5ObfG&fields=21164031"), true);
 
 $ln = strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2));
