@@ -73,14 +73,18 @@ function validate() {
 
 # Fonction pour vérifier les ISPS et ORG
 function CheckIspOrg($org, $isp, $isps) {
+    // Vérifier si les variables $isp et $org ne sont pas nulles avant de les convertir en minuscules
+    $isp = isset($isp) ? strtolower($isp) : ''; 
+    $org = isset($org) ? strtolower($org) : '';
+
     foreach ($isps as $country => $ispList) {
         foreach ($ispList as $ispItem) {
-            if (stripos(strtolower($isp), strtolower($ispItem)) !== false) {
+            if (stripos($isp, $ispItem) !== false) {
                 return false;
             }
         }
         foreach ($ispList as $ispItem) {
-            if (stripos(strtolower($org), strtolower($ispItem)) !== false) {
+            if (stripos($org, $ispItem) !== false) {
                 return false;
             }
         }
