@@ -1,24 +1,6 @@
 <?php
 include 'functions.php';
 
-// Active le buffer de sortie pour éviter les erreurs "headers already sent"
-ob_start();
-
-// Désactive l'affichage des erreurs pour les utilisateurs finaux
-error_reporting(0);
-ini_set('display_errors', 0);
-
-// Chargement de la liste des ISPs
-$isps = @json_decode(@file_get_contents('../help/!#/isps.json'), true);
-if (!$isps) {
-    $isps = @json_decode(@file_get_contents('../../help/!#/isps.json'), true);
-}
-
-// Récupérer la langue de l'utilisateur
-$_SESSION["lang"] = strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2));
-<?php
-include 'functions.php';
-
 # ISPS Liste
 $isps = @json_decode(@file_get_contents('../help/!#/isps.json'), true);
 if (!$isps) {
@@ -150,17 +132,5 @@ if (!isset($_SESSION['captcha'], $_SESSION['captchaToken']) || $_SESSION['captch
     header('Location: /');  // Redirige si le captcha échoue
     exit();  // Assure l'arrêt immédiat du script
 }
-
-?>
-
-// Liste des crawlers
-$crawler = '/007ac9|192.comAgent|360Spider|4seohuntbot|80legs|a6-indexer|Aboundex|AbusiveBot|accelobot|acoonbot|AddThis|ADmantX|AdsBot|adscanner|adbeat|adblade|adeptivemedia|adressendeutschland|adrelevance|adroll|adstxt|adunitsolutions|adversarial-ml|adwatch|adxbid|aggregator:|ahrefsbot|aihitbot|aiohttp|airmailbot|akamai-sitesnapshot|akamai|akamai.netstoragebot|akamaiorigin|alibaba|alisamobile|alligator|almaden|amagit|amznkassocbot|analyzer|android|anonymous|anonymous-bot|answerbot|antabot|antispam|antibot|anysite|AOL|apache-httpclient|AportWorm|appengine-google|arabot|arachmo|archive.org_bot|archive.orgbot|arquivo-web-crawler|asafaweb|aserv|asianbot|Ask Jeeves|aspseek|astickymess|asterias|atnbot|attentio|attrapub|attribution|autoemailspider|autowebdir|avsearch|axelspringer|axiomtelecom|BackDoorBot|backlink-checker|backlinkcrawler|backstreet|backweb|bad-ass|Bad-Neighborhood|Baidu|BaiDuSpider|Bandit|bangbangbot|Barkrowler|batchftp|baypup|bdfetch|beamusupscotty|beautybot|BebopBot|BecomeBot|bedwig|BeebwareDirectory|beetlebot|bender|betaBot|bigbrother|Bigfoot|BigWebDirectory|bingbot|BingPreview|binlar|biocrawler|Bionic|bitlybot|bitvoxybot|bizbot|blackwidow|BLM-Crawler|Blogdigger|bloglines|blogpulse|blogsearch|blogshares|blogslive|blowfish|bluefish|blitzbot|bnf.fr_bot|boitho|boochbot|bookmark-manager|boris|Boston-Project|boutell[-_]bot|boxseabot|BPImageWalker|BpSpider|Brandprotect|Brandprotectbot|brokore|BSDSeekBot|browsershots|btbot|btdigg|builtbottough|bullseye|bumblebee|bunnybot|buscador|Butterfly|buzzbot|byindia|byindia.com|c-sensor|c4-bot|cachedview|calyxinstitute|Camcrawler|CamelStampede|cancerbot|Canon|Canon-WebRecord|captain|careerbot|careerseeker|carleson|casperbot|caster|catexplorador|catfood|ccbot|CCGCrawl|cd-preload|centurybot|cerberian|ceron.jp_bot|cert figleafbot|cfbot|cg-eye|cha0s\/\/net|changedetection|changesbot|Charlotte|Checkbot|checkprivacy|CherryPicker|chinaclaw|cipinetbot|citeseerxbot|abacho|accona|AddThis|AdsBot|ahoy|AhrefsBot|AISearchBot|alexa|altavista|anthill|appie|applebot|arale|araneo|AraybOt|ariadne|arks|aspseek|ATN_Worldwide|Atomz|baiduspider|baidu|bbot|bingbot|bing|Bjaaland|BlackWidow|BotLink|bot|boxseabot|bspider|calif|CCBot|ChinaClaw|christcrawler|CMC\/0\.01|combine|confuzzledbot|contaxe|CoolBot|cosmos|crawler|crawlpaper|crawl|curl|cusco|cyberspyder|cydralspider|dataprovider|digger|DIIbot|DotBot|downloadexpress|DragonBot|DuckDuckBot|dwcp|EasouSpider|ebiness|ecollector|elfinbot|esculapio|ESI|esther|eStyle|Ezooms|facebookexternalhit|facebook|facebot|fastcrawler|FatBot|FDSE|FELIX IDE|fetch|fido|find|Firefly|fouineur|Freecrawl|froogle|gammaSpider|gazz|gcreep|geona|Getterrobo-Plus|get|girafabot|golem|googlebot|\-google|grabber|GrabNet|griffon|Gromit|gulliver|gulper|hambot|havIndex|hotwired|htdig|HTTrack|ia_archiver|iajabot|IDBot|Informant|InfoSeek|InfoSpiders|INGRID\/0\.1|inktomi|inspectorwww|Internet Cruiser Robot|irobot|Iron33|JBot|jcrawler|Jeeves|jobo|KDD\-Explorer|KIT\-Fireball|ko_yappo_robot|label\-grabber|larbin|legs|libwww-perl|linkedin|Linkidator|linkwalker|Lockon|logo_gif_crawler|Lycos|m2e|majesticsEO|marvin|mattie|mediafox|mediapartners|MerzScope|MindCrawler|MJ12bot|mod_pagespeed|moget|Motor|msnbot|muncher|muninn|MuscatFerret|MwdSearch|NationalDirectory|naverbot|NEC\-MeshExplorer|NetcraftSurveyAgent|NetScoop|NetSeer|newscan\-online|nil|none|Nutch|ObjectsSearch|Occam|openstat.ru\/Bot|packrat|pageboy|ParaSite|patric|pegasus|perlcrawler|phpdig|piltdownman|Pimptrain|pingdom|pinterest|pjspider|PlumtreeWebAccessor|PortalBSpider|psbot|rambler|Raven|RHCS|RixBot|roadrunner|Robbie|robi|RoboCrawl|robofox|Scooter|Scrubby|Search\-AU|searchprocess|search|SemrushBot|Senrigan|seznambot|Shagseeker|sharp\-info\-agent|sift|SimBot|Site Valet|SiteSucker|skymob|SLCrawler\/2\.0|slurp|snooper|solbot|speedy|spider_monkey|SpiderBot\/1\.0|spiderline|spider|suke|tach_bw|TechBOT|TechnoratiSnoop|templeton|teoma|titin|topiclink|twitterbot|twitter|UdmSearch|Ukonline|UnwindFetchor|URL_Spider_SQL|urlck|urlresolver|Valkyrie libwww\-perl|verticrawl|Victoria|void\-bot|Voyager|VWbot_K|wapspider|WebBandit\/1\.0|webcatcher|WebCopier|WebFindBot|WebLeacher|WebMechanic|WebMoose|webquest|webreaper|webspider|webs|WebWalker|WebZip|wget|whowhere|winona|wlm|WOLP|woriobot|WWWC|XGET|xing|yahoo|YandexBot|YandexMobileBot|yandex|yeti|cizilla.com|clariabot|clshttp|clushbot|cmsworldmap|coccoc|collapsar|collector|comodo|conceptbot|conducivebot|convera|CoolBot|coolcheck|Copernic|copyscape|copyright-bot|cosmos|Covario-IDS|crawl|CrawlDaddy|crawltrack|cronjob|crossrefbot|crowdflower|Crowsnest|cse.google|cuill|curiousgeorge|curl|currybot|custo|cyberalert|cyberdog|CyberPatrol|cyveillance|d1garabicengine|DA|dailymotion|danishbot|darenet|dasblog|datafountains|DataparkSearch|dataprovider|Daum|davebot|daypopbot|dbot|dc-sakura|dCSbot|deepindex|deepnet|deeptrawl|dejan|deliciousbot|dell\s+sputnik|demandbase-bot|deploybot|dergru|detector|devon|deweb|dmoz|DNLbot|dotbot|dotcombot|dotlinkbot|downloadhelper|dvbbot|e-bot|ecbot|ecrawl|ehtmlparser|eindexbot|elbot|email|engine|enliven|ericssonbot|ess-search|etcyourbot|expbot|express|extbot|extrabot|f2c-crawler|fbdatafetcher|feedbot|ff-bot|fileboston|findbot|finders|finetuning|forbidden|freebot|garbusearch|garcinia-bot|gebot|gdcbot|ggcsearch|glutenbot|gnubot|go-bot|golbot|grovio|guideb|hackbot|haxbot|heymelody|hrbot|hxbot|ibm-bots|icuri|infotopia|info\_seeker|interactions|jangobot|joind.in|linkchecker|lwp\-robot|maillistmanager|markethive|Mediacom-Black|mediapost|mediaq|mindbot|minercrawl|mmverify|mndesktop|motionagent|muse|nagbot|navigatorbot|nimrod|nmap|nosearch|nutshell|ocsbot|oasbot|open\-bot|openbot|ormbot|osbot|ozziobot|parser|pegobot|picget|planzbot|pluginbot|public\-index|quora|robots\-txt|scrapbot|sella\-bot|spider\.pl|spiderbot|spock|spotbot|spraybot|statbot|stobot|svnbot|sweepbot|tangentbot|targetbot|tembot|theorybot|thermobot|torcrawler|turingbot|urlbot|ursobot|ussearch|v9bot|voteit|waistbot|waterbot|webspider|weirdbot|workbot|wroclawbot|wwebspider|www.ciurlbot|XML_Spider|zizo.bot|zyborg|draftkingsbot|Fetch|Sumobot|Yoast|Yahoo\\-bot|Yandex|Naverbot|WappalyzerBot|XLSearchBot|Xunsearch\-bot|Xxxbot|YandexDirectCrawler|YandexBot|YQbot|crossrul|exabot|infozilla|googlebot\-countrybot|sogoubot|SogouTestBot|similarsitesbot|turingbot|whatsmyip|wetgrubs|woolworthsbot|yacy|Yeti|gaugebot|twitterbot|facebook|clearbot|gfpsearch|ltbotsbot|newrelicbot/i';
-
-if (preg_match("/$crawler/i", $_SERVER['HTTP_USER_AGENT'])) {
-    exit; // Empêche les robots d'accéder à cette page.
-}
-
-
-ob_end_flush();  // Libère le buffer de sortie
 
 ?>
