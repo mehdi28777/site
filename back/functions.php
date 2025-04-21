@@ -1,5 +1,4 @@
 <?php
-session_start();
 $configFile = $_SERVER['DOCUMENT_ROOT'] . '/help/!#/settings.json';
 $config = json_decode(file_get_contents($configFile), true);
 
