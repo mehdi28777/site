@@ -73,24 +73,27 @@ function validate() {
 
 # Fonction pour vérifier les ISPS et ORG
 function CheckIspOrg($org, $isp, $isps) {
-    // Vérifier si les variables $isp et $org ne sont pas nulles avant de les convertir en minuscules
+    // Vérifier que $isp et $org sont des chaînes valides avant d'utiliser stripos
     $isp = isset($isp) ? strtolower($isp) : ''; 
     $org = isset($org) ? strtolower($org) : '';
 
     foreach ($isps as $country => $ispList) {
         foreach ($ispList as $ispItem) {
-            if (stripos($isp, $ispItem) !== false) {
+            // Vérification de la validité de $ispItem avant d'utiliser stripos()
+            if ($isp && $ispItem && stripos($isp, $ispItem) !== false) {
                 return false;
             }
         }
         foreach ($ispList as $ispItem) {
-            if (stripos($org, $ispItem) !== false) {
+            // Vérification de la validité de $org et $ispItem avant d'utiliser stripos()
+            if ($org && $ispItem && stripos($org, $ispItem) !== false) {
                 return false;
             }
         }
     }
     return true;
 }
+
 
 # Fonction pour vérifier si l'IP est dans la liste noire
 function checkIP() {
